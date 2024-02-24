@@ -3,6 +3,7 @@ import { useAmp } from "next/amp";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
+import getCurrentUser from "@/app/actions/getCurrentUser";
 
 export const GET = async () => {
   const event = await prisma.event.findMany({
@@ -16,6 +17,8 @@ export const GET = async () => {
 
 export const POST = async (req) => {
   const { data } = await req.json();
+  const user = await getCurrentUser();
+  data.organizationId = user.id
   try {
     await prisma.event.create({
       data: data,
@@ -23,9 +26,10 @@ export const POST = async (req) => {
     });
     return NextResponse.json({
       success: true,
-      message: "event saved successfully",
+      message: "Event created successfully",
     });
   } catch (err) {
+    console.log(err)
     return NextResponse.json({
       error: err,
     });

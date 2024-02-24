@@ -15,7 +15,7 @@ export const metadata= {
 export default async function RootLayout({
   children
 }) {
-  const session = await getSession();
+  const session = await getSession()
   return (
     <html lang="en">
       <body className={poppins.className}>
@@ -28,7 +28,7 @@ export default async function RootLayout({
                   <SideBar user={session.user}/>
                 </div>
               }
-              <div className='w-full'>
+              <div className='w-full p-4'>
                 {children}
               </div>
             </div>

@@ -1,5 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import {PrismaAdapter} from '@next-auth/prisma-adapter'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import bcrypt from 'bcrypt'
 import prisma from '@/app/libs/prismadb'
 import { PrismaClient } from "@prisma/client/edge";
@@ -10,11 +10,11 @@ export const authOptions = {
         CredentialsProvider({
             name: 'credentials',
             credentials: {
-                username: {label: 'username', type: 'text'},
-                password: {label: 'password', type: 'password'}
+                username: { label: 'username', type: 'text' },
+                password: { label: 'password', type: 'password' }
             },
-            async authorize(credentials){
-                if(!credentials?.username || !credentials?.password){
+            async authorize(credentials) {
+                if (!credentials?.username || !credentials?.password) {
                     throw new Error('Invalid Credentials')
                 }
                 const user = await prisma.organization.findFirst({
@@ -23,21 +23,21 @@ export const authOptions = {
                         isVerified: true
                     }
                 });
-                if(!user || !user?.password){
+                if (!user || !user?.password) {
                     throw new Error('Invalid Credentials')
                 }
                 const isCorrectPassword = await bcrypt.compare(
                     credentials.password,
                     user.password
                 );
-                if(!isCorrectPassword){
+                if (!isCorrectPassword) {
                     throw new Error("Invalid Password")
                 }
                 return user;
             }
         })
     ],
-    debug: process.env.NODE_ENV==='development',
+    debug: process.env.NODE_ENV === 'development',
     session: {
         strategy: "jwt"
     },
