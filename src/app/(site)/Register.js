@@ -67,7 +67,7 @@ export default function Register({setPage}) {
           bg-gray-100
         "
       >
-        <div className="bg-white sm:px-10 py-8 shadow sm:rounded-lg sm:py-10 sm:mx-auto sm:w-2/3">
+        <div className="bg-white sm:px-10 py-8 shadow sm:rounded-lg sm:py-10 sm:mx-auto sm:w-2/3 z-20">
             <h2
                 className="mt-3
                 text-center
