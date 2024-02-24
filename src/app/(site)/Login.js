@@ -8,18 +8,12 @@ import { ReloadIcon } from "@radix-ui/react-icons"
 import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
-import Login from "./Login"
-import Register from "./Register"
-import { BackgroundBeams } from "@/components/ui/background";
 
-export default function page() {
+export default function Login({setPage}) {
     const [isLoading, setIsLoading] = useState(false);
-    const [pageLoading, setPageLoading] = useState(true);
     const router = useRouter()
     const session = useSession();
-    if(session?.status=="authenticated"){
-      router.push('/')
-    }
+
     const {register, handleSubmit, formState: {errors}} = useForm();
     const onSubmit= async(data)=>{
       setIsLoading(true)
@@ -33,22 +27,12 @@ export default function page() {
         }
         if(callback?.ok && !callback?.error){
           toast.success("Logged in")
-          router.push('/')
+          router.push('/dashboard')
         }
       })
       .finally(()=>setIsLoading(false))
     }
-
-    useEffect(()=>{
-      if(session?.status === 'authenticated'){
-          router.push('/');
-      }else{
-        setPageLoading(false);
-      }
-    }, [session?.status, router])
-
     return (
-      !pageLoading &&
       <div
         className="
           flex
@@ -61,7 +45,7 @@ export default function page() {
           bg-gray-100
         "
       >
-        <div className="bg-white sm:px-10 py-8 shadow sm:rounded-lg sm:py-10 sm:mx-auto sm:w-full sm:max-w-md  z-10">
+        <div className="bg-white sm:px-10 py-8 shadow sm:rounded-lg sm:py-10 sm:mx-auto sm:w-full sm:max-w-md">
             <h2
                 className="mt-3
                 text-center
@@ -102,12 +86,11 @@ export default function page() {
                   {isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin"/>}
                   Login
                 </Button>
-                <p className="text-center text-sm mt-3">Not Registered?<a className="hover:underline text-gray-600 font-bold mx-1" href="https://hyper-e.vercel.app/getting-started">Signup here</a></p>
+                <p className="text-center text-sm mt-3">Not Registered?<span className="cursor-pointer hover:underline text-gray-600 font-bold mx-1" onClick={()=>setPage("SIGNUP")}>Signup here</span></p>
               </div>
             </div>
         </div>
 
       </div>
     )
-  );
 }

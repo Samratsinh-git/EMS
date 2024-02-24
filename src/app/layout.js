@@ -1,6 +1,7 @@
 import { Poppins } from 'next/font/google'
 import './globals.css'
 import AuthContext from './context/AuthContext'
+import ToastContext from './context/ToastContext'
 
 const poppins = Poppins({ subsets: ['latin'], weight: "400", display: "swap" })
 
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <AuthContext>
+          <ToastContext/>
           {children}
         </AuthContext>
       </body>
