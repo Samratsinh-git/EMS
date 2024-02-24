@@ -56,8 +56,28 @@ model Event {
   deadline            DateTime?
   createdAt           DateTime     @default(now()) @db.Timestamp(6)
   updatedAt           DateTime     @default(now()) @updatedAt @db.Timestamp(6)
+  Form                Form[]
 
   @@index([organizationId], name: "organizationId")
+}
+
+model Form {
+  id            Int         @id @default(autoincrement())
+  event         Event       @relation(fields: [eventId], references: [id])
+  eventId       Int
+  formFields    FormField[]
+  formResponses String[]
+}
+
+enum FormField {
+  Department
+  Year
+  Email
+  Mobile
+  College
+  RegistrationID
+  LinkedinID
+  GithubID
 }
 
 model Template {
