@@ -9,8 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_DATABASE_URL")
 }
 
@@ -18,19 +18,21 @@ model Organization {
   // Auto-generated unique ID
   id           Int      @id @default(autoincrement())
   // Name of the organization
-  name         String
+  name         String?
   // Email of the organization
-  email        String
+  email        String?
   // Password for the organization
-  password     String
+  password     String?
   //username for the organization
-  username     String
-  // Unique string for the organization
-  uniquestring String
-  // Login history as a JSON string
-  loginHistory String
+  username     String?
+  // Unique string? for the organization
+  uniquestring String?
+  // is verified status
+  isVerified   Boolean  @default(false)
+  // Login history as a JSON string?
+  loginHistory String?
   // URL for the organization's logo
-  logoUrl      String
+  logoUrl      String?
   // Created at timestamp
   createdAt    DateTime @default(now()) @db.Timestamp(6)
   // Updated at timestamp
@@ -44,14 +46,14 @@ model Organization {
 
 model Event {
   id                  Int          @id @default(autoincrement())
-  name                String
+  name                String?
   organization        Organization @relation(fields: [organizationId], references: [id])
   organizationId      Int
-  formJson            String
-  filledDataJson      String
-  certificateTemplate String
-  startDate           DateTime
-  deadline            DateTime
+  formJson            String?
+  filledDataJson      String?
+  certificateTemplate String?
+  startDate           DateTime?
+  deadline            DateTime?
   createdAt           DateTime     @default(now()) @db.Timestamp(6)
   updatedAt           DateTime     @default(now()) @updatedAt @db.Timestamp(6)
 
@@ -60,9 +62,9 @@ model Event {
 
 model Template {
   id              Int          @id @default(autoincrement())
-  name            String
+  name            String?
   type            TemplateType
-  templateContent String
+  templateContent String?
   createdAt       DateTime     @default(now()) @db.Timestamp(6)
   updatedAt       DateTime     @default(now()) @updatedAt @db.Timestamp(6)
 
