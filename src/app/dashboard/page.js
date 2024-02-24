@@ -1,8 +1,15 @@
-import React from 'react'
+'use client'
+import { Button } from '@/components/ui/button'
+import React, { useState } from 'react'
+import EventDialog from './EventDialog'
 
 function page() {
+  const [eventDialogOpen, setEventDialogOpen] = useState(false)
   return (
-    <div className='bg-green-200'>page</div>
+    <div>
+      <Button onClick={()=>setEventDialogOpen(true)} >Create Event</Button>
+      <EventDialog eventDialogOpen={eventDialogOpen} setEventDialogOpen={setEventDialogOpen}/>
+    </div>
   )
 }
 
