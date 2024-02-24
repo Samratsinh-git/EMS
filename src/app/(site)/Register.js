@@ -132,7 +132,7 @@ export default function Register({setPage}) {
               <div>
                 <Button disabled={isLoading} onClick={handleSubmit(onSubmit)} className="w-full mt-2">
                   {isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin"/>}
-                  Login
+                  Register
                 </Button>
                 <p className="text-center text-sm mt-3">Already Registered?<span className="cursor-pointer hover:underline text-gray-600 font-bold mx-1" onClick={()=>setPage("LOGIN")}>Login Here</span></p>
               </div>

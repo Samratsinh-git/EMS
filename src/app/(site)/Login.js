@@ -13,9 +13,7 @@ export default function Login({setPage}) {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter()
     const session = useSession();
-    if(session?.status=="authenticated"){
-      router.push('/dashboard')
-    }
+
     const {register, handleSubmit, formState: {errors}} = useForm();
     const onSubmit= async(data)=>{
       setIsLoading(true)

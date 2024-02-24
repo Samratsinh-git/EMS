@@ -17,27 +17,8 @@ export default function page() {
     const router = useRouter()
     const session = useSession();
     if(session?.status=="authenticated"){
-      router.push('/')
+      router.push('/dashboard')
     }
-    const {register, handleSubmit, formState: {errors}} = useForm();
-    const onSubmit= async(data)=>{
-      setIsLoading(true)
-      await signIn('credentials', {
-        ...data,
-        redirect: false
-      })
-      .then((callback)=>{
-        if(callback?.error){
-          toast.error("Invalid Crendentials")
-        }
-        if(callback?.ok && !callback?.error){
-          toast.success("Logged in")
-          router.push('/')
-        }
-      })
-      .finally(()=>setIsLoading(false))
-    }
-
     useEffect(()=>{
       if(session?.status === 'authenticated'){
           router.push('/dashboard');
