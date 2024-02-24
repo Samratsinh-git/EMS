@@ -1,4 +1,5 @@
 import prisma from "@/app/libs/prismadb";
+import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export const GET = async (req, context) => {
@@ -11,13 +12,7 @@ export const GET = async (req, context) => {
   });
   if (organization) {
     organization.isVerified = true;
-    return new NextResponse(
-      `
-          <h1>Email verified succesfully</h1>
-          <h2>feel free to login and explore now..</h2>
-      `,
-      { status: 410, headers: { "content-type": "text/html" } }
-    );
+    redirect()
   }
   return NextResponse.json({ organization });
 };

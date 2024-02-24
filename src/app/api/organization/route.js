@@ -54,9 +54,8 @@ export const POST = async (req) => {
 
     await prisma.organization.create({
       data: data,
+      cacheStrategy: { ttl: 60 },
     });
-
-    console.log("sodfd");
     return NextResponse.json({
       success: true,
       message: "email sent successfully",
@@ -151,5 +150,46 @@ const sendMail = async (email, uniqueString) => {
         resolve("Email sent: " + responce.response);
       }
     });
+  });
+};
+
+export const DELETE = async (req) => {
+  const url = new URL(req.url).searchParams;
+  const id = Number(url.get("id")) || 0;
+
+  const organization = await prisma.organization.delete({
+    where: {
+      id: id,
+    },
+    cacheStrategy: { ttl: 60 },
+  });
+
+  if (!organization) {
+    return NextResponse.json(
+      {
+        message: "Error",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  return NextResponse.json({});
+};
+
+export const PUT = async (req) => {
+  const { data } = await req.json();
+
+  const organization = await prisma.organization.update({
+    where: {
+      id: Number(id),
+    },
+    data: data,
+    cacheStrategy: { ttl: 60 },
+  });
+
+  return NextResponse.json({
+    organization,
   });
 };
