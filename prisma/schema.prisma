@@ -15,26 +15,61 @@ datasource db {
 
 model Organization {
   // Auto-generated unique ID
-  id        String      @id @default(uuid())
+  id           Int      @id @default(autoincrement())
   // Name of the organization
-  name      String
+  name         String
   // Email of the organization
-  email     String
+  email        String
   // Password for the organization
-  password  String
+  password     String
   //username for the organization
-  username  String
+  username     String
   // Unique string for the organization
   uniquestring String
   // Login history as a JSON string
   loginHistory String
   // URL for the organization's logo
-  logoUrl   String
+  logoUrl      String
   // Created at timestamp
-  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  createdAt    DateTime @default(now()) @db.Timestamp(6)
   // Updated at timestamp
-  updatedAt DateTime  @updatedAt @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime @default(now()) @updatedAt @db.Timestamp(6)
+
+  events Event[]
 
   // Ensure email is unique across organizations
   @@unique([email])
+}
+
+model Event {
+  id                  Int          @id @default(autoincrement())
+  name                String
+  organization        Organization @relation(fields: [organizationId], references: [id])
+  organizationId      Int
+  formJson            String
+  filledDataJson      String
+  certificateTemplate String
+  startDate           DateTime
+  deadline            DateTime
+  createdAt           DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt           DateTime     @default(now()) @updatedAt @db.Timestamp(6)
+
+  @@index([organizationId], name: "organizationId")
+}
+
+model Template {
+  id              Int          @id @default(autoincrement())
+  name            String
+  type            TemplateType
+  templateContent String
+  createdAt       DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt       DateTime     @default(now()) @updatedAt @db.Timestamp(6)
+
+  @@map("templates")
+}
+
+enum TemplateType {
+  Email
+  Form
+  Certificate
 }
