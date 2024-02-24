@@ -1,3 +1,4 @@
+"use client"
 import Link from 'next/link'
 import React from 'react'
 import { AiOutlineDashboard} from 'react-icons/ai'
@@ -5,9 +6,12 @@ import { CiMail} from 'react-icons/ci'
 import { GrCertificate,GrView } from "react-icons/gr";
 import { CiViewList } from "react-icons/ci";
 import { FaWpforms } from "react-icons/fa";
-import { IoIosLink } from "react-icons/io";
+import { IoIosLink,IoIosLogOut } from "react-icons/io";
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 function SideBar({user}) {
+    const router = useRouter()
   return (
     <div className='bg-slate-800 h-screen py-4'>
         <div className='px-4'>
@@ -50,6 +54,11 @@ function SideBar({user}) {
                     Link Shortner
                 </Link>
             </div>
+            <hr />
+            <p onClick={async()=>{
+                await signOut({redirect: false});
+                router.push('/')
+            }} className='px-4 gap-2 py-2 hover:bg-gray-600 rounded-md cursor-pointer flex items-center'><IoIosLogOut className='text-gray-400' size={22}/><span className='text-white text-base'>Logout</span></p>            
         </div>
     </div>
   )
