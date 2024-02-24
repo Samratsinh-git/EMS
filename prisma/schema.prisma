@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  // Auto-generated unique ID
+  id        String      @id @default(uuid())
+  // Name of the organization
+  name      String
+  // Email of the organization
+  email     String
+  // Password for the organization
+  password  String
+  //username for the organization
+  username  String
+  // Unique string for the organization
+  uniquestring String
+  // Login history as a JSON string
+  loginHistory String
+  // URL for the organization's logo
+  logoUrl   String
+  // Created at timestamp
+  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  // Updated at timestamp
+  updatedAt DateTime  @updatedAt @default(now()) @db.Timestamp(6)
+
+  // Ensure email is unique across organizations
+  @@unique([email])
+}
