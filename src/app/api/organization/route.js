@@ -15,7 +15,8 @@ export const GET = async () => {
 };
 
 export const POST = async (req) => {
-  const { data } = await req.json();
+  const  data  = await req.json();
+  console.log(data)
   const email = data.email;
   const username = data.username;
   try {
@@ -62,6 +63,7 @@ export const POST = async (req) => {
       message: "email sent successfully",
     });
   } catch (err) {
+    console.log(err)
     return NextResponse.json({
       error: err,
     });
