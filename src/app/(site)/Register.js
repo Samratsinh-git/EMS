@@ -12,51 +12,49 @@ import axios from "axios"
 
 export default function Register({setPage}) {
     const [isLoading, setIsLoading] = useState(false);
-    const [pageLoading, setPageLoading] = useState(true);
     const [file, setFile] = useState(null)
     const router = useRouter()
-    const session = useSession();
-    if(session?.status=="authenticated"){
-      router.push('/')
-    }
     const {register, handleSubmit, formState: {errors}} = useForm();
     const onSubmit= async(body)=>{
-        setIsLoading(true)
-        if(!file){
-            toast.error("Upload a logo")
-        }
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', `${process.env.NEXT_PUBLIC_CLOUDINARY_PRESET}`);
-        formData.append("cloud_name", `${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}`);
+        try{
+          setIsLoading(true)
+          if(!file){
+              toast.error("Upload a logo")
+          }
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('upload_preset', `${process.env.NEXT_PUBLIC_CLOUDINARY_PRESET}`);
+          formData.append("cloud_name", `${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}`);
 
-        const data1 = await axios.post(
-        `${process.env.NEXT_PUBLIC_CLOUDINARY_API}`,
-        formData,
-        {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+          const data1 = await axios.post(
+          `${process.env.NEXT_PUBLIC_CLOUDINARY_API}`,
+          formData,
+          {
+              headers: {
+                  'Content-Type': 'multipart/form-data'
+              }
+          }
+          )
+          body.logoUrl = data1.data.secure_url
+          const data = body
+          console.log(data)
+          const resp = await axios.post('/api/organization', data) 
+          if(resp.data.hasOwnProperty('success')){
+            toast.success(resp.data.message)
+            setPage('LOGIN')
+          }else if(resp.data.hasOwnProperty('message')){
+            toast.error(resp.data.message);
+          }else{
+            toast.error("Something went wrong");
+          }
+        }catch(err){
+          toast.error("Something went wrong");
+        }finally{
+          setIsLoading(false)
         }
-        )
-        body.logoUrl = data1.data.secure_url
-        const data = body
-        console.log(data)
-        const resp = await axios.post('/api/organization', data) 
-        console.log(resp)
-        setIsLoading(false)
     }
 
-    useEffect(()=>{
-      if(session?.status === 'authenticated'){
-          router.push('/');
-      }else{
-        setPageLoading(false);
-      }
-    }, [session?.status, router])
-
     return (
-      !pageLoading &&
       <div
         className="
           flex

@@ -39,14 +39,14 @@ export const POST = async (req) => {
     });
     if (organizationExisting) {
       return NextResponse.json({
-        message: "email already exist",
+        message: "Email already exist",
       });
     }
     const uniquestring = randString() + email;
     data.uniquestring = uniquestring;
 
     const saltRounds = 5;
-    bcrypt.hash(data.password, saltRounds, async (err, hash) => {
+    await bcrypt.hash(data.password, saltRounds, async (err, hash) => {
       if (err) throw new Error("Internal Server Error");
       data.password = hash;
     });
@@ -59,7 +59,7 @@ export const POST = async (req) => {
     });
     return NextResponse.json({
       success: true,
-      message: "email sent successfully",
+      message: "Email sent successfully",
     });
   } catch (err) {
     console.log(err)
@@ -82,7 +82,7 @@ function randString() {
 }
 
 const sendMail = async (email, uniqueString) => {
-  const transporter = nodemailer.createTransport({
+  const transporter = await nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: process.env.AUTH_EMAIL,

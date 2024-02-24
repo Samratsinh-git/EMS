@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req, context) => {
   const uniquestring = context.params.uniquestring;
+  console.log(uniquestring)
   const organization = await prisma.organization.findFirst({
     where: {
       uniquestring: uniquestring,
@@ -12,7 +13,13 @@ export const GET = async (req, context) => {
   });
   if (organization) {
     organization.isVerified = true;
-    redirect()
+    await prisma.organization.update({
+      where: {
+        id: organization.id,
+      },
+      data: organization,
+      cacheStrategy: { ttl: 60 },
+    });
   }
-  return NextResponse.json({ organization });
+  return NextResponse.json({message: "Email verified success" });
 };

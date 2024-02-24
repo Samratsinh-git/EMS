@@ -11,11 +11,10 @@ import toast from "react-hot-toast"
 
 export default function Login({setPage}) {
     const [isLoading, setIsLoading] = useState(false);
-    const [pageLoading, setPageLoading] = useState(true);
     const router = useRouter()
     const session = useSession();
     if(session?.status=="authenticated"){
-      router.push('/')
+      router.push('/dashboard')
     }
     const {register, handleSubmit, formState: {errors}} = useForm();
     const onSubmit= async(data)=>{
@@ -30,22 +29,12 @@ export default function Login({setPage}) {
         }
         if(callback?.ok && !callback?.error){
           toast.success("Logged in")
-          router.push('/')
+          router.push('/dashboard')
         }
       })
       .finally(()=>setIsLoading(false))
     }
-
-    useEffect(()=>{
-      if(session?.status === 'authenticated'){
-          router.push('/');
-      }else{
-        setPageLoading(false);
-      }
-    }, [session?.status, router])
-
     return (
-      !pageLoading &&
       <div
         className="
           flex

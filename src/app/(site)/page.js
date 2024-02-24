@@ -13,7 +13,6 @@ import Register from "./Register"
 
 export default function page() {
     const [isLoading, setIsLoading] = useState(false);
-    const [pageLoading, setPageLoading] = useState(true);
     const [page, setPage] = useState("LOGIN")
     const router = useRouter()
     const session = useSession();
@@ -41,14 +40,11 @@ export default function page() {
 
     useEffect(()=>{
       if(session?.status === 'authenticated'){
-          router.push('/');
-      }else{
-        setPageLoading(false);
+          router.push('/dashboard');
       }
     }, [session?.status, router])
 
     return (
-      !pageLoading &&
       (page==="LOGIN"? <Login setPage={setPage} />: <Register setPage={setPage} />)
     )
 }
