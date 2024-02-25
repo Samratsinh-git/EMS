@@ -6,32 +6,31 @@ import blobStream from "blob-stream";
 
 //required data: {form_id, message} id = eventid; message to send(better in html);
 export const POST = async (req, context) => {
-  const { data } = await req.json();
+  const data = await req.json();
 
   const form = await prisma.form.findFirst({
     where: {
       id: data.form_id,
     },
-    select:{
-      event:true,
-      formResponses:true,
+    select: {
+      event: true,
+      formResponses: true,
     },
     cacheStrategy: { ttl: 60 },
   });
-
   const userDetails = form.formResponses;
-
-  userDetails.array.forEach(async (element) => {
-    const responseData = JSON.parse(element);
-    await sendMail(responseData, form.event, data.message);
+  userDetails.forEach((element) => {
+    element = JSON.parse(element);
   });
-  return NextResponse.json({ template });
+
+  userDetails.forEach(async (element) => {
+    await sendMail(element, form.event, data.message);
+  });
+  return NextResponse.json({ message: "Email sent successfully" });
 };
 
 const sendMail = async (responseData, event, message) => {
-
-  console.log(responseData,event, message);
-  return 0;
+  console.log(responseData, event, message);
   const doc = new PDFDocument({
     layout: "landscape",
     size: "A4",
@@ -69,11 +68,7 @@ const sendMail = async (responseData, event, message) => {
   const maxWidth = 140;
   const maxHeight = 70;
 
-  doc.image("assets/winners.png", doc.page.width / 2 - maxWidth / 2, 60, {
-    fit: [maxWidth, maxHeight],
-    align: "center",
-  });
-
+ 
   jumpLine(doc, 5);
 
   doc
@@ -273,7 +268,7 @@ const sendMail = async (responseData, event, message) => {
   });
   var mailOptions = {
     from: process.env.EMAIL_ID,
-    to: email,
+    to: "dhrumilp063@gmail.com",
     subject: "Message from e",
     text: "Hello guys, this is message from your registerd email",
     html: message,
