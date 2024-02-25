@@ -24,3 +24,29 @@ export const POST = async (req) => {
         });
     }
 };
+export const PUT = async (req) => {
+    try {
+        const r = await req.json();
+
+        const form = await prisma.form.update({
+            where: {
+                id: r.id
+            },
+            data: {
+                formResponses: {
+                    push: r.data
+                }
+            }
+        });
+        return NextResponse.json({
+            success: true,
+        });
+    } catch (e) {
+        console.log(e)
+        return NextResponse.json({
+            error: e
+        });
+    }
+};
+
+

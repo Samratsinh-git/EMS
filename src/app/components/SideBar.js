@@ -26,11 +26,11 @@ function SideBar({ user }) {
                 <hr />
                 <p className='px-4 text-gray-500 font-bold text-lg'>MEDIA & MARKETING</p>
                 <div className='flex flex-col gap-3'>
-                    <Link className='rounded-md hover:bg-gray-600 py-2 px-4 flex items-center text-white gap-2 text-base' href={'/dashboard'}>
+                    <Link className='rounded-md hover:bg-gray-600 py-2 px-4 flex items-center text-white gap-2 text-base' href={'/certificate'}>
                         <GrCertificate className='text-gray-400' size={22} />
                         Certificate Generator
                     </Link>
-                    <Link className='rounded-md hover:bg-gray-600 py-2 px-4 flex items-center text-white gap-2 text-base' href={'/dashboard'}>
+                    <Link className='rounded-md hover:bg-gray-600 py-2 px-4 flex items-center text-white gap-2 text-base' href={'/bulk-mailer'}>
                         <CiMail className='text-gray-400' size={22} />
                         Bulk Mailer
                     </Link>
