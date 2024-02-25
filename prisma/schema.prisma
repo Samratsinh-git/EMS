@@ -62,22 +62,12 @@ model Event {
 }
 
 model Form {
-  id            Int         @id @default(autoincrement())
-  event         Event       @relation(fields: [eventId], references: [id])
-  eventId       Int
-  formFields    FormField[]
-  formResponses String[]
-}
-
-enum FormField {
-  Department
-  Year
-  Email
-  Mobile
-  College
-  RegistrationID
-  LinkedinID
-  GithubID
+  id              Int      @id @default(autoincrement())
+  event           Event    @relation(fields: [eventId], references: [id])
+  eventId         Int
+  formDescription String
+  formFields      String[]
+  formResponses   String[]
 }
 
 model Template {

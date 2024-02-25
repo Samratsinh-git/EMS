@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 function SideBar({ user }) {
     const router = useRouter()
     return (
-        <div className='bg-slate-800 h-screen py-4'>
+        <div className='bg-slate-800 fixed w-[23%] left-0 h-screen py-4'>
             <div className='px-4'>
                 <p className='text-white my-4 font-bold text-2xl'>{user?.name}</p>
             </div>
