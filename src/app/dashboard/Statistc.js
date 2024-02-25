@@ -11,19 +11,19 @@ export const projects = [
   {
     title: "Events Created",
     description:
-      "eventCount",
+      "2",
     link: "#",
   },
   {
     title: "Forms Generated",
     description:
-      "FormCount",
+      "1",
     link: "#",
   },
   {
     title: "Current Event",
     description:
-      "currenteventCount",
+      "3",
     link: "#",
   },
 ];
