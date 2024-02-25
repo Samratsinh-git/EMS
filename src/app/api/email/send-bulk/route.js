@@ -1,26 +1,28 @@
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
-
+import nodemailer from "nodemailer"
 //required data: {id, message} id = eventid; message to send(better in html);
 export const POST = async (req, context) => {
-  const { data } = await req.json();
-
-  const event = await prisma.event.findFirst({
+  const data = await req.json();
+  const { formResponses } = await prisma.form.findFirst({
     where: {
-      id: data.id,
+      eventId: data.eventId,
+    },
+    select: {
+      formResponses: true
     },
     cacheStrategy: { ttl: 60 },
   });
 
-  const userDetails = JSON.parse(event.filledDataJson);
-  userDetails.array.forEach(async (element) => {
-    await sendMail(userDetails.email, data.message);
+  formResponses.forEach(async (element) => {
+    const resp = JSON.parse(element);
+    await sendMail(resp.email, data.message);
   });
-  return NextResponse.json({ template });
+  return NextResponse.json({ success: true });
 };
 
 const sendMail = async (email, message) => {
-  const transporter = nodemailer.createTransport({
+  const transporter = await nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: process.env.AUTH_EMAIL,
@@ -28,11 +30,11 @@ const sendMail = async (email, message) => {
     },
   });
   var mailOptions = {
-    from: process.env.EMAIL_ID,
+    from: process.env.AUTH_EMAIL,
     to: email,
     subject: "Message from e",
-    text: "Hello guys, this is message from your registerd email",
-    html: message,
+    text: message,
+    // html: message,
   };
   await new Promise((resolve, reject) => {
     transporter.sendMail(mailOptions, function (error, responce) {
