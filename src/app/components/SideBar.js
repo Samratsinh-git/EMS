@@ -57,10 +57,10 @@ function SideBar({ user }) {
                 </div>
                 <hr />
                 <p onClick={async () => {
-                    await signOut({ redirect: false });
-                    router.push('/')
+                    await signOut();
                     toast.success("Logged out")
                 }} className='px-4 gap-2 py-2 hover:bg-gray-600 rounded-md cursor-pointer flex items-center'><IoIosLogOut className='text-gray-400' size={22} /><span className='text-white text-base'>Logout</span></p>
+
             </div>
         </div>
     )

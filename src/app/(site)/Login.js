@@ -27,7 +27,7 @@ export default function Login({ setPage }) {
         }
         if (callback?.ok && !callback?.error) {
           toast.success("Logged in")
-          router.push('/dashboard')
+          window.location.replace('/dashboard')
         }
       })
       .finally(() => setIsLoading(false))
