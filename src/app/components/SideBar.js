@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 function SideBar({ user }) {
     const router = useRouter()
     return (
-        <div className='bg-slate-800 fixed w-[23%] left-0 h-screen py-4'>
+        <div className='bg-slate-800 left-0 h-screen py-4'>
             <div className='px-4'>
                 <p className='text-white my-4 font-bold text-2xl'>{user?.name}</p>
             </div>
@@ -45,7 +45,7 @@ function SideBar({ user }) {
                         <FaWpforms className='text-gray-400' size={22} />
                         Forms Generator
                     </Link>
-                    <Link className='rounded-md hover:bg-gray-600 py-2 px-4 flex items-center text-white gap-2 text-base' href={'/dashboard'}>
+                    <Link className='rounded-md hover:bg-gray-600 py-2 px-4 flex items-center text-white gap-2 text-base' href={'/view-registrations'}>
                         <GrView className='text-gray-400' size={22} />
                         View Registrations
                     </Link>
