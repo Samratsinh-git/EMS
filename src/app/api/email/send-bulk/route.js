@@ -1,6 +1,6 @@
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer"
+import nodemailer from "nodemailer";
 //required data: {id, message} id = eventid; message to send(better in html);
 export const POST = async (req, context) => {
   const data = await req.json();
@@ -9,19 +9,25 @@ export const POST = async (req, context) => {
       eventId: data.eventId,
     },
     select: {
-      formResponses: true
+      formResponses: true,
     },
     cacheStrategy: { ttl: 60 },
   });
 
+  const event = await prisma.event.findFirst({
+    where: {
+      id: data.eventId,
+    },
+  });
+  console.log(formResponses, event);
   formResponses.forEach(async (element) => {
     const resp = JSON.parse(element);
-    await sendMail(resp.email, data.message);
+    await sendMail(resp["Email Address"], event, data.message);
   });
   return NextResponse.json({ success: true });
 };
 
-const sendMail = async (email, message) => {
+const sendMail = async (email, event, message) => {
   const transporter = await nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -30,9 +36,9 @@ const sendMail = async (email, message) => {
     },
   });
   var mailOptions = {
-    from: process.env.AUTH_EMAIL,
+    from: '"ClubCompass" <clubcompass@gmail.com>',
     to: email,
-    subject: "Message from e",
+    subject: `Message from ${event.name}`,
     text: message,
     // html: message,
   };
