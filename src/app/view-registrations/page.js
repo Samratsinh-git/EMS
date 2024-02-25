@@ -63,14 +63,13 @@ function page() {
             {
                 isLoading ? <Loading />
                     :
-                    form ? <div>Event Form: <Link className='text-blue-400 hover:underline' href={`/events/forms/events/forms/${encodeURIComponent(nextBase64.encode(form.id))}`}>Form Link</Link></div>
+                    form ? <div>Event Form: <Link className='text-blue-400 hover:underline' href={`/events/forms/${encodeURIComponent(nextBase64.encode(form.id))}`}>Form Link</Link></div>
                         : selectedEvent && <p>No Form Generated</p>
             }
             <div className='no-scrollbar'>
                 {
-                    form && (form.responses > 0 ? <FormData /> : selectedEvent && <p className='text-center'>No Resgistrations yet</p>)
+                    form && (form.formResponses.length > 0 ? <FormData form={form} /> : selectedEvent && <p className='text-center'>No Resgistrations yet</p>)
                 }
-                <FormData />
             </div>
         </div >
     )

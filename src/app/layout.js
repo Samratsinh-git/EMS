@@ -28,7 +28,7 @@ export default async function RootLayout({
                 <SideBar user={session.user} />
               </div>
             }
-            <div className={`w-[78%] ${session ? "p-4" : ""}`}>
+            <div className={`mx-auto w-[78%] ${session ? "p-4" : ""}`}>
               {children}
             </div>
           </div>

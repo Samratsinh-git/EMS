@@ -18,7 +18,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import nextBase64 from 'next-base64';
 
-const fields = ["Registration ID", "Department", "Year", "Email Address", "Contact Number", "College", "Github Profile", "Linkedin Profile"]
+const fields = ["Name", "Department", "Year", "Email Address", "Contact Number", "College", "Github Profile", "Linkedin Profile"]
 
 
 
