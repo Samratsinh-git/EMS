@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ClubCompass
 
-## Getting Started
+## Purpose
 
-First, run the development server:
+ClubCompass is an all-in-one solution designed to streamline event management for clubs. Our platform provides a comprehensive set of features, including event creation, forms generation, registration management, bulk mailer, certificate generation, link shortener, and mailing list generator. With ClubCompass, clubs can efficiently manage their events and enhance their overall organizational workflow.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. Event Creation
+Easily create and manage events with our intuitive event creation interface.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 2. Forms Generator
+Customize and generate dynamic forms to collect relevant information from participants.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 3. View Registrations
+Effortlessly view and manage event registrations in one centralized location.
 
-## Learn More
+### 4. Bulk Mailer
+Send bulk emails to participants, keeping them informed and engaged.
 
-To learn more about Next.js, take a look at the following resources:
+### 5. Certificate Generation (Future Extension)
+Automatically generate certificates for event participants.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 6. Link Shortener (Future Extension)
+Create shortened, shareable links for easy event promotion.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 7. Mailing List Generator (Future Extension)
+Build mailing lists for future communication and outreach.
 
-## Deploy on Vercel
+## Future Extensions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ClubCompass is designed for continuous improvement. Future extensions, to be implemented afterwards, may include:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Integration with popular calendar applications.
+- Enhanced analytics for event performance evaluation.
+- Social media integration for broader reach and promotion.
+
+## Challenges Faced
+
+While developing ClubCompass, our team encountered several challenges, including:
+
+1. **Integration Complexity**: Integrating various features seamlessly while maintaining a user-friendly experience.
+2. **Dynamic Form Generation**: Creating a system for generating dynamic forms based on event requirements.
+3. **Scalability**: Designing the platform to handle a growing number of clubs and events.
+
+## Meet the Team
+
+- [Rushi Gandhi](https://github.com/Rushi0508)
+- [Dhrumil Patel](https://github.com/dhrumilpatel30)
+- [Samratsinh Dodiya](https://github.com/Parzival-007)
+- [Harsh Gajera](https://github.com/harshgajera028)
+
+
+## Tech Stack
+
+- NextJS 
+- PostgreSQL
+- Prisma 
+- Shadcn UI
+
+Feel free to contribute and make ClubCompass even better! If you encounter any issues or have suggestions, please open an [issue](https://github.com/Rushi0508/EMS/issues).
