@@ -9,6 +9,7 @@ import { FaWpforms } from "react-icons/fa";
 import { IoIosLink, IoIosLogOut } from "react-icons/io";
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 function SideBar({ user }) {
     const router = useRouter()
@@ -58,6 +59,7 @@ function SideBar({ user }) {
                 <p onClick={async () => {
                     await signOut({ redirect: false });
                     router.push('/')
+                    toast.success("Logged out")
                 }} className='px-4 gap-2 py-2 hover:bg-gray-600 rounded-md cursor-pointer flex items-center'><IoIosLogOut className='text-gray-400' size={22} /><span className='text-white text-base'>Logout</span></p>
             </div>
         </div>

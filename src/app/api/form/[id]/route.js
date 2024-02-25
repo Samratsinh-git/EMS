@@ -8,6 +8,9 @@ export const GET = async (req, context) => {
         where: {
             id: id,
         },
+        include: {
+            event: true
+        },
         cacheStrategy: { ttl: 60 },
     });
 
