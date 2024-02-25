@@ -2,9 +2,9 @@ import React from 'react'
 
 function Statistc() {
     return (
-        <div className="flex space-x-5 pt-10">
-            <div className="flex-1 shadow-lg bg-gray-50 p-6 rounded-md">
-                <h2 className="text-lg font-semibold m-5 cursor-pointer">Events Created</h2>
+        <div className="flex space-x-6 pt-10">
+            <div className="flex-1 shadow-lg bg-gray-50  p-6 rounded-md">
+                <h2 className="text-lg font-semibold m-5 cursor-pointer hover:text-slate-600">Events Created</h2>
                 <p className="text-3xl font-bold m-5 cursor-pointer">eventCount</p>
             </div>
 
