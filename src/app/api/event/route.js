@@ -6,12 +6,16 @@ import bcrypt from "bcrypt";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
 export const GET = async () => {
-  const event = await prisma.event.findMany({
+  const user = await getCurrentUser()
+  const events = await prisma.event.findMany({
+    where: {
+      organizationId: user.id
+    },
     cacheStrategy: { ttl: 60 },
   });
 
   return NextResponse.json({
-    event,
+    events,
   });
 };
 
