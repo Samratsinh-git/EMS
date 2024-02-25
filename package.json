@@ -27,6 +27,7 @@
     "lucide-react": "^0.338.0",
     "next": "14.1.0",
     "next-auth": "^4.24.6",
+    "next-base64": "^1.1.0",
     "nodemailer": "^6.9.10",
     "prisma": "^5.10.2",
     "react": "^18",

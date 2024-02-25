@@ -16,6 +16,7 @@ import { ReloadIcon } from '@radix-ui/react-icons';
 import Preview from './Preview';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import nextBase64 from 'next-base64';
 
 const fields = ["Registration ID", "Department", "Year", "Email Address", "Contact Number", "College", "Github Profile", "Linkedin Profile"]
 
@@ -67,7 +68,7 @@ function page() {
     const { data } = await axios.post('/api/form', body);
     if (data.hasOwnProperty('success')) {
       toast.success("Form Generate sucessfully")
-      router.push(`/events/forms/${data.form.id}`)
+      router.push(`/events/forms/${encodeURIComponent(nextBase64.encode(data.form.id))}`)
     } else {
       toast.error("Something went wrong")
     }
