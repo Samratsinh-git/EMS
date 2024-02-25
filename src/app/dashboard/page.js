@@ -11,7 +11,6 @@ function page() {
       <Button onClick={()=>setEventDialogOpen(true)} >Create Event</Button>
       <EventDialog eventDialogOpen={eventDialogOpen} setEventDialogOpen={setEventDialogOpen}/>
       <Statistic/>
-      
     </div>
     
     
