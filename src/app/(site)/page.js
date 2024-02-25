@@ -51,7 +51,7 @@ export default function page() {
   }, [session?.status, router]);
   return (
     <>
-      <div className="z-10">
+      <div>
         {page === "LOGIN" && <Login setPage={setPage} />}
         {page !== "LOGIN" && <Register setPage={setPage} />}
       </div>

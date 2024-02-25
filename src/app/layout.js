@@ -24,11 +24,11 @@ export default async function RootLayout({
           <div className='flex'>
             {
               session &&
-              <div className='relative w-[30%]'>
+              <div className='w-[22%] h-screen sticky top-0'>
                 <SideBar user={session.user} />
               </div>
             }
-            <div className='w-full p-4'>
+            <div className={`w-[78%] ${session ? "p-4" : ""}`}>
               {children}
             </div>
           </div>

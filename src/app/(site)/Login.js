@@ -36,13 +36,11 @@ export default function Login({ setPage }) {
     <div
       className="
           flex
-          h-screen
           flex-col
           justify-center
-          py-12
           sm:px-6
+          h-screen
           lg:px-8
-          bg-gray-100
         "
     >
       <div className="bg-white sm:px-10 py-8 shadow sm:rounded-lg sm:py-10 sm:mx-auto sm:w-full sm:max-w-md z-20">
