@@ -47,7 +47,7 @@ While developing ClubCompass, our team encountered several challenges, including
 
 - [Rushi Gandhi](https://github.com/Rushi0508)
 - [Dhrumil Patel](https://github.com/dhrumilpatel30)
-- [Samratsinh Dodiya](https://github.com/Parzival-007)
+- [Samratsinh Dodiya](https://github.com/Samratsing-git)
 - [Harsh Gajera](https://github.com/harshgajera028)
 
 
